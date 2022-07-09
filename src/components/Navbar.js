@@ -1,4 +1,12 @@
-import React from 'react';
+
+              {/* <Link to="/settings">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/4185/4185461.png"
+                  alt="user-dp"
+                  id="user-dp"
+                />
+              </Link> */}
+              import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -54,7 +62,7 @@ class Navbar extends React.Component {
             <div className="user">
               <Link to="/settings">
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/4185/4185461.png"
+                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
                   alt="user-dp"
                   id="user-dp"
                 />
