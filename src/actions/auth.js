@@ -44,7 +44,6 @@ import {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log('data', data);
           if (data.success) {
             // dispatch action to save user
             localStorage.setItem('token', data.data.token);
@@ -57,11 +56,9 @@ import {
   }
   
   export function authenticateUser(user) {
-    //   console.log("user from actions",user);
     return {
       type: AUTHENTICATE_USER,
       user,
-      
     };
   }
   
@@ -71,6 +68,32 @@ import {
     };
   }
   
+  // export function signup(email, password, confirmPassword, name) {
+  //   return (dispatch) => {
+  //     const url = APIUrls.signup();
+  //     fetch(url, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded',
+  //       },
+  //       body: getFormBody({
+  //         email,
+  //         password,
+  //         confirm_password: confirmPassword,
+  //         name,
+  //       }),
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         if (data.success) {
+  //           localStorage.setItem('token', data.data.token);
+  //           dispatch(signupSuccessful(data.data.user));
+  //           return;
+  //         }
+  //         dispatch(signupFailed(data.message));
+  //       });
+  //   };
+  // }
   export function signup(email, password, confirmPassword, name) {
     return (dispatch) => {
       const url = APIUrls.signup();
@@ -99,7 +122,6 @@ import {
         });
     };
   }
-  
   export function startSingup() {
     return {
       type: SIGNUP_START,
