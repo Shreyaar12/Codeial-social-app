@@ -5,34 +5,74 @@ import PropTypes from 'prop-types';
 import { Navigate ,Outlet} from 'react-router-dom';
 
 import { fetchPosts } from '../actions/posts';
-import { Home, Navbar, Page404, Login, Signup } from './';
+import {
+  Home,
+  Navbar,
+  Page404,
+  Login,
+  Signup,
+  Settings,
+  UserProfile,
+} from './';
 import jwt from 'jwt-decode';
 import { authenticateUser } from '../actions/auth';
+import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 
-const Settings = () => <div>Setting</div>;
 
 const PrivateRoute = (privateRouteProps) => {
-  const { isLoggedin, path, component: Component } = privateRouteProps;
+  const { isLoggedin, path, component: Component,location } = privateRouteProps;
 
+//     return (
+//       <Route
+//       path={path}
+//       render={(props) => {
+//         console.log('props', props);
+//         console.log('isLoggedin', isLoggedin);
+//         return isLoggedin ? (
+//           <Component {...props} />
+//         ) : (
+//           <Navigate
+//             to={{
+//               pathname: '/login',
+//               state: {
+//                 from: props.location,
+//               },
+//             }}
+//           />
+//     );
   
+//   }}
+// />
+// );
     // <Route
     //   path={path}
     //   render={(props) => {
     //     return isLoggedin ? <Component {...props} /> : <Navigate to="/login" />;
     //   }}    />
     // console.log(isLoggedin );
-    return isLoggedin ? <Outlet/> : <Navigate to="/login" />
+    console.log("location",this.privateRouteProps);
+    
+    return isLoggedin ? <Outlet/> : <Navigate to={{
+    
+      pathname: '/login',
+      state: {
+        from: this.props.location,
+        
+      },
+
+    }} />
 
 };
 
-
+//react v6 me props pass ni krne hote arguments me default le leta h
 // const Home = () => <div>Home</div>;
 
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
   
-  const token = localStorage.getItem('token');
+  // const token = localStorage.getItem('token');
+  const token = getAuthTokenFromLocalStorage();
   if (token) {
     const user = jwt(token);
 
@@ -93,7 +133,13 @@ class App extends React.Component {
               isLoggedin = {true}
             /> */}
             <Route exact path="/settings" element={ <PrivateRoute isLoggedin = {auth.isLoggedin}><Settings/></PrivateRoute>}/>
-          <Route element ={<Page404 />} />
+            <Route exact path="/user/:userId" element={ <PrivateRoute isLoggedin = {auth.isLoggedin}><UserProfile/></PrivateRoute>}/>
+            {/* <PrivateRoute
+              path="/user/:userId"
+              component={UserProfile}
+              isLoggedin={auth.isLoggedin}
+            /> */}
+              <Route element ={<Page404 />} />
         </Routes>
 
       
