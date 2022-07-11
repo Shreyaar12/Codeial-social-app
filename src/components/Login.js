@@ -92,6 +92,7 @@ class Login extends Component {
     // const navigate = useNavigate();
     const { error, inProgress, isLoggedin } = this.props.auth;
     const { from } = this.props || { from: { pathname: '/' } };
+    // sir's code: const { from } = this.props.location.state || { from: { pathname: '/' } };
 
     if (isLoggedin) {
       console.log("from",from);
