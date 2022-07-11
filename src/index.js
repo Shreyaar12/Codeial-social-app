@@ -48,13 +48,22 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './components/App';
 import { configureStore } from './store';
+import { unstable_HistoryRouter as HistoryRouter , BrowserRouter as Router } from "react-router-dom";
+// import { createBrowserHistory } from "history";
 
 const store = configureStore();
+// const history = createBrowserHistory({ window });
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
+      <Router>
+   {/* <HistoryRouter history={history}> */}
       <App />
+{/*       
+      </HistoryRouter> */}
+      </Router>
+ 
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')

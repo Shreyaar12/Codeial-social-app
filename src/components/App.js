@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Children, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route , Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route , Routes,useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Navigate ,Outlet} from 'react-router-dom';
 
@@ -20,7 +20,7 @@ import { getAuthTokenFromLocalStorage } from '../helpers/utils';
 
 
 const PrivateRoute = (privateRouteProps) => {
-  const { isLoggedin, path, component: Component,location } = privateRouteProps;
+  const { isLoggedin,children,location } = privateRouteProps;
 
 //     return (
 //       <Route
@@ -50,49 +50,70 @@ const PrivateRoute = (privateRouteProps) => {
     //     return isLoggedin ? <Component {...props} /> : <Navigate to="/login" />;
     //   }}    />
     // console.log(isLoggedin );
-    console.log("location",this.privateRouteProps);
+    console.log("location",privateRouteProps);
     
-    return isLoggedin ? <Outlet/> : <Navigate to={{
+    // return isLoggedin ? children: <Navigate to={{
     
-      pathname: '/login',
-      state: {
-        from: this.props.location,
-        
-      },
-
-    }} />
+    //   pathname: '/login',
+    //   state: {
+    //     from: location,
+    //     //history library to refer the history in router dom or convert into functional component, hooks 
+    //   },
+      <Navigate to="/login" state={location}></Navigate>
+      
+    // }} />
 
 };
 
-//react v6 me props pass ni krne hote arguments me default le leta h
 // const Home = () => <div>Home</div>;
 
-class App extends React.Component {
-  componentDidMount() {
-    this.props.dispatch(fetchPosts());
+function App(props)  {
+  console.log('this.props',props);
+
+  const { posts,auth } = props;
+  const location = useLocation();
+  console.log('location',location);
+   useEffect(()=> { props.dispatch(fetchPosts());
+        console.log("component props",props); 
+      // const token = localStorage.getItem('token');
+      const token = getAuthTokenFromLocalStorage();
+      if (token) {
+        const user = jwt(token);
+    
+        // console.log('user', user);
+        props.dispatch(
+          authenticateUser({
+            email: user.email,
+            _id: user._id,
+            name: user.name,
+          })
+        );
+     
+   };},[]);
+
+//) {
+//     this.props.dispatch(fetchPosts());
+//     console.log("component props",this.props); 
+//   // const token = localStorage.getItem('token');
+//   const token = getAuthTokenFromLocalStorage();
+//   if (token) {
+//     const user = jwt(token);
+
+//     // console.log('user', user);
+//     this.props.dispatch(
+//       authenticateUser({
+//         email: user.email,
+//         _id: user._id,
+//         name: user.name,
+//       })
+//     );
+//   }
+// }
+
   
-  // const token = localStorage.getItem('token');
-  const token = getAuthTokenFromLocalStorage();
-  if (token) {
-    const user = jwt(token);
-
-    // console.log('user', user);
-    this.props.dispatch(
-      authenticateUser({
-        email: user.email,
-        _id: user._id,
-        name: user.name,
-      })
-    );
-  }
-}
-
-  render() {
-    console.log('this.props',this.props);
-
-    const { posts,auth } = this.props;
+    
     return (
-      <Router>
+      // <Router>
         <div>
           <Navbar />
           
@@ -121,7 +142,8 @@ class App extends React.Component {
                 return <Home {...props} posts={posts} />;
               }}
             /> */}
-            <Route path="/" element={<Home posts={posts} />}/> 
+            <Route path="/" element={<Home posts={posts} />}/>
+            {/* no need to render props can pass it to element directly as it gets automatically rendered */}
             {/* //something passed to home for that only props is there */}
           <Route path="/login" element={<Login />} />
 
@@ -132,8 +154,8 @@ class App extends React.Component {
               element={<Settings />}
               isLoggedin = {true}
             /> */}
-            <Route exact path="/settings" element={ <PrivateRoute isLoggedin = {auth.isLoggedin}><Settings/></PrivateRoute>}/>
-            <Route exact path="/user/:userId" element={ <PrivateRoute isLoggedin = {auth.isLoggedin}><UserProfile/></PrivateRoute>}/>
+            <Route exact path="/settings" element={ <PrivateRoute isLoggedin = {auth.isLoggedin} path={location.pathName}> <Settings/></PrivateRoute>}/>
+            <Route exact path="/user/:userId" element={ <PrivateRoute isLoggedin = {auth.isLoggedin} path={location.pathName}><UserProfile/></PrivateRoute>}/>
             {/* <PrivateRoute
               path="/user/:userId"
               component={UserProfile}
@@ -145,10 +167,9 @@ class App extends React.Component {
       
        </div>
       
-      </Router>
+//      </Router>
     );
   }
-}
 // function Invoice=(props)=> {
 //   return <Home 
 //   {...props} posts={posts} />;
