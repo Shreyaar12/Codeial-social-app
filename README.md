@@ -1,3 +1,5 @@
+# About the App
+This project is a social media app which consists of authentication using Jwt tokens, chat using websocket client, posts, user profile, adding friends and other features. Made with react v6 following Coding Ninjas course. Feel free to contribute. 
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
