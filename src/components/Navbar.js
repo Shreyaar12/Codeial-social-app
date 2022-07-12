@@ -6,19 +6,37 @@ import { logoutUser } from '../actions/auth';
 import { searchUsers } from '../actions/search';
 
 class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      searchText: '',
+      userslist: [],
+    };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.results !== this.props.results) {
+      this.setState({ userslist: this.props.results });
+    }
+  }
+  componentDidMount() {
+    this.setState({ userslist: this.props.results });
+  }
+
+  //added a state and made it controlled
+  handleSearch = (e) => {
+    this.setState({ searchText: e.target.value });
+    this.props.dispatch(searchUsers(this.state.searchText));
+  };
   logOut = () => {
     localStorage.removeItem('token');
     this.props.dispatch(logoutUser());
   };
 
-  handleSearch = (e) => {
-    const searchText = e.target.value;
-
-    this.props.dispatch(searchUsers(searchText));
-  };
-
   render() {
-    const { auth, results } = this.props;
+    //removed results from here created a state for usersList
+    const { auth } = this.props;
     return (
       <nav className="nav">
         <div className="left-div">
@@ -35,14 +53,25 @@ class Navbar extends React.Component {
             src="https://image.flaticon.com/icons/svg/483/483356.svg"
             alt="search-icon"
           />
-          <input placeholder="Search" onChange={this.handleSearch} />
+          <input
+            placeholder="Search"
+            value={this.state.searchText}
+            onChange={this.handleSearch}
+          />
 
-          {results.length > 0 && (
+          {this.state.userslist.length > 0 && (
             <div className="search-results">
               <ul>
-                {results.map((user) => (
+                {this.state.userslist.map((user) => (
                   <li className="search-results-row" key={user._id}>
-                    <Link to={`/user/${user._id}`}>
+                    {/* add onClick event */}
+                    <Link
+                      to={`/user/${user._id}`}
+                      onClick={() => {
+                        this.setState({ searchText: '' });
+                        this.setState({ userslist: [] });
+                      }}
+                    >
                       <img
                         src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
                         alt="user-dp"

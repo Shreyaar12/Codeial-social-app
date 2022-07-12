@@ -48,7 +48,7 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './components/App';
 import { configureStore } from './store';
-import { unstable_HistoryRouter as HistoryRouter , BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 // import { createBrowserHistory } from "history";
 
 const store = configureStore();
