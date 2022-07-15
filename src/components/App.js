@@ -70,8 +70,7 @@ function App(props)  {
 
             <Route exact path="/settings" element={ <PrivateRoute isLoggedin = {auth.isLoggedin} path={location.pathname}> <Settings/></PrivateRoute>}/>
             <Route exact path="/user/:userId" element={ <PrivateRoute isLoggedin = {auth.isLoggedin} path={location.pathname}><UserProfile/></PrivateRoute>}/>
-            <Route element ={<Page404 />} />
-      
+            <Route  path = "*" element ={<Page404 />} />
           
         </Routes>
 
