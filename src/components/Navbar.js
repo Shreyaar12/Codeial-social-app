@@ -50,7 +50,7 @@ class Navbar extends React.Component {
         <div className="search-container">
           <img
             className="search-icon"
-            src="https://image.flaticon.com/icons/svg/483/483356.svg"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/1024px-Search_Icon.svg.png"
             alt="search-icon"
           />
           <input
@@ -73,8 +73,8 @@ class Navbar extends React.Component {
                       }}
                     >
                       <img
-                        src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                        alt="user-dp"
+src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+alt="user-dp"
                       />
                       <span>{user.name}</span>
                     </Link>
@@ -89,8 +89,9 @@ class Navbar extends React.Component {
             <div className="user">
               <Link to="/settings">
                 <img
-                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                  alt="user-dp"
+
+src="https://www.stylist.co.uk/images/app/uploads/2019/09/17165121/gettyimages-143479992-crop-1568735528-1000x1000.jpg?w=1200&h=1&fit=max&auto=format%2Ccompress"
+alt="user-dp"
                   id="user-dp"
                 />
               </Link>

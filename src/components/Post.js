@@ -49,7 +49,7 @@ class Post extends Component {
           <div className="post-avatar">
             <Link to={`/user/${post.user._id}`}>
               <img
-                src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                src="https://www.stylist.co.uk/images/app/uploads/2019/09/17165121/gettyimages-143479992-crop-1568735528-1000x1000.jpg?w=1200&h=1&fit=max&auto=format%2Ccompress"
                 alt="user-pic"
               />
             </Link>
@@ -64,12 +64,12 @@ class Post extends Component {
             <button className="post-like no-btn" onClick={this.handlePostLike}>
               {isPostLikedByUser ? (
                 <img
-                  src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
+                  src="https://www.kindpng.com/picc/m/21-210418_like-png-thumbs-up-emoji-messenger-transparent-png.png"
                   alt="like post"
                 />
               ) : (
                 <img
-                  src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+                  src="https://www.kindpng.com/picc/m/21-210418_like-png-thumbs-up-emoji-messenger-transparent-png.png"
                   alt="likes-icon"
                 />
               )}
@@ -78,7 +78,7 @@ class Post extends Component {
 
             <div className="post-comments-icon">
               <img
-                src="https://image.flaticon.com/icons/svg/1380/1380338.svg"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4iuQT5qe0Wx4WtBQ72yQSZDfwJRh5ueUJs_f1jR-FEzpWRsLz__o4wNRZxkrQqBcnat0&usqp=CAU"
                 alt="comments-icon"
               />
               <span>{post.comments.length}</span>

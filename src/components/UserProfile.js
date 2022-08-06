@@ -275,7 +275,8 @@ const UserProfile = (props) => {
     <div className="settings">
       <div className="img-container">
         <img
-          src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+          src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+          
           alt="user-dp"
         />
       </div>
