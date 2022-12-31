@@ -5,7 +5,7 @@ This project is a social media app which consists of authentication using Jwt to
 
 https://user-images.githubusercontent.com/91542376/183237235-ff7b74b8-fec7-4083-97c0-50c012f37f14.mp4
 
-
+You can also check this out at [my Youtube](https://youtu.be/3r-0ukkdQb0)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
